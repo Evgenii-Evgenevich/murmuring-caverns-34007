@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>murmuring-caverns-34007</title>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script type='text/javascript' src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+    <link rel='stylesheet' type='text/css' href='/stylesheets/main.css' />
+    <!--[if lt IE 9]><script src='//html5shiv.googlecode.com/svn/trunk/html5.js'></script><![endif]-->
+    <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no'>
+</head>
+<body>
+
+<div class='header'>
+    <nav class='main'>
+        <li class='title'><a href='/'>murmuring-caverns-34007</a></li>
+        <li class='fork'><a href='https://github.com/Evgenii-Evgenevich/murmuring-caverns-34007'>View On GitHub</a></li>
+    </nav>
+</div>
+
+<div class='wrapper'>
+    <section class='content_wrap main'>
+        <section id='index' class='inner'>
+            <h2></h2>
+            <p></p>
+        </section>
+        <% if (locals.results) { %>
+            <section id='db' class='inner'>
+                <h2>Database Results</h2>
+                <ul>
+                    <% locals.results.forEach(function(r) { %>
+                    <li><%= r.id %> - <%= r.name %></li>
+                    <% }); %>
+                </ul>
+            </section>
+        <% } %>
+        <div class='title'>
+            <hr>
+            <h6 class='credits'>Project maintained by <a href='https://github.com/Evgenii-Evgenevich'>Evgenii Evgenyevich</a></h6>
+        </div>
+    </section>
+</div>
+
+
+</body>
+</html>

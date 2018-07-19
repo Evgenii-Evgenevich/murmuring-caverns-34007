@@ -6,6 +6,7 @@ const app = require('./app');
 const server = require('./server');
 
 const secret = require('./pass').generate(15);
+
 const session = require('express-session')({
     key: 'user_sid',
     secret: secret,
@@ -13,13 +14,17 @@ const session = require('express-session')({
     saveUninitialized: false
 });
 
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+
 app
     .use(express.static(path.join(__dirname, 'public')))
     .use(express.json())
     .use(session)
+    .use('/', indexRouter)
+    .use('/users', usersRouter)
     .set('views', path.join(__dirname, 'views'))
     .set('view engine', 'ejs')
-    .get('/', (req, res) => res.render('pages/index'))
 ;
 
 
