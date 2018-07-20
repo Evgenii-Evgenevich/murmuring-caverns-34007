@@ -1,7 +1,7 @@
 {
-  "name": "node-js-getting-started",
+  "name": "murmuring-caverns-34007",
   "version": "0.3.0",
-  "description": "A sample Node.js app using Express 4",
+  "description": "a sample Node.js app",
   "engines": {
     "node": "8.9.1"
   },
@@ -28,12 +28,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "https://github.com/Evgenii-Evgenevich/murmuring-caverns-34007"
   },
   "keywords": [
     "node",
     "heroku",
     "express"
   ],
-  "license": "MIT"
+  "license": "GNU Affero General Public License v3.0"
 }
