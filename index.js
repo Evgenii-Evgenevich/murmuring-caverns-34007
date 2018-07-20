@@ -5,7 +5,7 @@ const path = require('path');
 const app = require('./app');
 const server = require('./server');
 
-const secret = require('./pass').generate(15);
+const secret = require('./pass').generate(30);
 
 const session = require('express-session')({
     key: 'user_sid',
@@ -17,10 +17,16 @@ const session = require('express-session')({
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
+const passport = require('./passport');
+const flash = require('connect-flash');
+
 app
     .use(express.static(path.join(__dirname, 'public')))
     .use(express.json())
     .use(session)
+    .use(passport.initialize())
+    .use(passport.session())
+    .use(flash())
     .use('/', indexRouter)
     .use('/users', usersRouter)
     .set('views', path.join(__dirname, 'views'))

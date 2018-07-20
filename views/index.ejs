@@ -19,23 +19,76 @@
 
 <div class='wrapper'>
     <section class='content_wrap main'>
-        <section id='index' class='inner'>
-            <h2></h2>
-            <p></p>
-        </section>
-        <% if (locals.results) { %>
-            <section id='db' class='inner'>
-                <h2>Database Results</h2>
-                <ul>
-                    <% locals.results.forEach(function(r) { %>
-                    <li><%= r.id %> - <%= r.name %></li>
-                    <% }); %>
-                </ul>
+
+        <% if (locals.home) { %>
+            <section id='index' class='inner'>
+                <% if (session.authenticated) { %>
+                    <h2>Hello, <%= session.username %></h2>
+                    <p><a href='/signout'>sign out</a></p>
+                <% } else { %>
+                    <p><a href='/auth/facebook'>auth by facebook</a></p>
+                    <p><a href='/auth/google'>auth by google play</a></p>
+                    <p><a href='/signin/temp'>sign in</a></p>
+                    <p><a href='/signup/temp'>sign up</a></p>
+                <% } %>
             </section>
         <% } %>
+
+        <% if (locals.signin) { %>
+            <section id='signin' class='inner'>
+                <% if (session.authenticated) { %>
+                <% } else { %>
+                    <p>
+                        <form action='/signin/temp' method='post'>
+                            <table>
+                                <tr>
+                                    <td><label>Yours Name:</label></td>
+                                    <td><input type='text' name='name'/></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Yours Password:</label></td>
+                                    <td><input type='password' name='pass'/></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><input style='float: right' type='submit' value='sign in'/></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </p>
+                <% } %>
+            </section>
+        <% } %>
+
+        <% if (locals.signup) { %>
+            <section id='signup' class='inner'>
+                <% if (session.authenticated) { %>
+                <% } else { %>
+                    <p>
+                        <form action='/signup/temp' method='post'>
+                            <table>
+                                <tr>
+                                    <td><label>Yours Name:</label></td>
+                                    <td><input type='text' name='name'/></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Yours Password:</label></td>
+                                    <td><input type='text' name='pass'/></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><input style='float: right' type='submit' value='sign up'/></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </p>
+                <% } %>
+            </section>
+        <% } %>
+
         <div class='title'>
             <hr>
-            <h6 class='credits'>Project maintained by <a href='https://github.com/Evgenii-Evgenevich'>Evgenii Evgenyevich</a></h6>
+            <h6 class='credits'>Project maintained by <a href='https://github.com/Evgenii-Evgenevich'>Evgenii Evgenevich</a></h6>
         </div>
     </section>
 </div>

@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
+var socket = require('../socket');
+
 /* GET users listing. */
 router.get('/',
     (req, res, next) => {
-        res.send('respond with a resource');
+        res.send('the number of online users: ' + socket.numUsers);
     }
 );
 
