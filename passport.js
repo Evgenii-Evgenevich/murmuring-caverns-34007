@@ -18,9 +18,9 @@ const signinStrategy = new (require('passport-local').Strategy)({
 		passReqToCallback: true 
 	},
 	(req, name, pass, done) => {
-		process.nextTick(() => {
+		//process.nextTick(() => {
 			return userController.temp.try_signin(req, name, pass, done);
-		});
+		//});
 	}
 );
 
@@ -31,9 +31,9 @@ const signupStrategy = new (require('passport-local').Strategy)({
 		passReqToCallback: true 
 	},
 	(req, name, pass, done) => {
-		process.nextTick(() => {
+		//process.nextTick(() => {
 			return userController.temp.try_signup(req, name, pass, done);
-		});
+		//});
 	}
 );
 
@@ -46,9 +46,9 @@ const facebookStrategy = new (require('passport-facebook').Strategy)({
         profileFields: ['id', 'name'] 
     },
 	(req, token, refreshToken, profile, done) => {
-		process.nextTick(() => {
+		//process.nextTick(() => {
 			return userController.facebook.try_auth_facebook(req, token, refreshToken, profile, done);
-		});
+		//});
 	}
 );
 
@@ -60,9 +60,9 @@ const googleStrategy = new (require('passport-google-oauth').OAuth2Strategy)({
 		passReqToCallback: true
 	},
 	(req, token, refreshToken, profile, done) => {
-		process.nextTick(() => {
+		//process.nextTick(() => {
 			return userController.google.try_auth_google(req, token, refreshToken, profile, done);
-		});
+		//});
 	}
 );
 
