@@ -1,12 +1,12 @@
-const server = require('./server');
+const PORT = process.env.PORT || 5000;
 
 const GOOGLE_ID = process.env.PASSPORT_GOOGLE_ID || 'clientID';
 const GOOGLE_SECRET = process.env.PASSPORT_GOOGLE_SECRET || 'clientSecret';
-const GOOGLE_CALLBACK = server.address().address + ':' + server.address().port + '/auth/google/callback';
+const GOOGLE_CALLBACK = 'https://murmuring-caverns-34007.herokuapp.com:' + PORT + '/auth/google/callback';
 
 const FACEBOOK_ID = process.env.PASSPORT_FACEBOOK_ID || 'clientID';
 const FACEBOOK_SECRET = process.env.PASSPORT_FACEBOOK_SECRET || 'clientSecret';
-const FACEBOOK_CALLBACK = server.address().address + ':' + server.address().port + '/auth/facebook/callback';
+const FACEBOOK_CALLBACK = 'https://murmuring-caverns-34007.herokuapp.com:' + PORT + '/auth/facebook/callback';
 
 const host = server.address().address;
 const port = server.address().port;
