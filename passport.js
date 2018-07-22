@@ -13,20 +13,28 @@ const passport = require('passport');
 const userController = require('./UserController');
 
 const signinStrategy = new (require('passport-local').Strategy)({
-    usernameField: 'name',
-    passwordField: 'pass',
-    passReqToCallback: true 
-},
-    userController.temp.try_signin
+		usernameField: 'name',
+		passwordField: 'pass',
+		passReqToCallback: true 
+	},
+	(req, name, pass, done) => {
+		process.nextTick(() => {
+			userController.temp.try_signin(req, name, pass, done);
+		});
+	}
 );
 
 
 const signupStrategy = new (require('passport-local').Strategy)({
-    usernameField: 'name',
-    passwordField: 'pass',
-    passReqToCallback: true 
-},
-    userController.temp.try_signup
+		usernameField: 'name',
+		passwordField: 'pass',
+		passReqToCallback: true 
+	},
+	(req, name, pass, done) => {
+		process.nextTick(() => {
+			userController.temp.try_signup(req, name, pass, done);
+		});
+	}
 );
 
 
@@ -37,17 +45,25 @@ const facebookStrategy = new (require('passport-facebook').Strategy)({
         profileURL: 'https://graph.facebook.com/v2.5/me?fields=first_name,last_name',
         profileFields: ['id', 'name'] 
     },
-    userController.facebook.try_auth_facebook
+	(req, token, refreshToken, profile, done) => {
+		process.nextTick(() => {
+			userController.facebook.try_auth_facebook(req, token, refreshToken, profile, done);
+		});
+	}
 );
 
 
 const googleStrategy = new (require('passport-google-oauth').OAuth2Strategy)({
-    clientID: GOOGLE_ID,
-    clientSecret: GOOGLE_SECRET,
-    callbackURL: GOOGLE_CALLBACK,
-    passReqToCallback: true
-},
-    userController.google.try_auth_google
+		clientID: GOOGLE_ID,
+		clientSecret: GOOGLE_SECRET,
+		callbackURL: GOOGLE_CALLBACK,
+		passReqToCallback: true
+	},
+	(req, token, refreshToken, profile, done) => {
+		process.nextTick(() => {
+			userController.google.try_auth_google(req, token, refreshToken, profile, done);
+		});
+	}
 );
 
 passport
