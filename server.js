@@ -1,5 +1,5 @@
 const app = require('./app');
 
-const server = require('https').createServer(app);
+const server = require('http').createServer(app);
 
 module.exports = server;
