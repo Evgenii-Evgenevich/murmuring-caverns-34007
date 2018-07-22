@@ -40,10 +40,13 @@ function try_signin(req, name, pass, done) {
 }
 
 function try_signup(req, name, pass, done) {
+    process.stdout.write('\n==========================try_signup==========================\n');
     let user_id = 0;
     let service = 'temp';
 
     userRepository.findByUserIdAndServceAndName(user_id, service, name, function (user) {
+        process.stdout.write('\n==========================findByUserIdAndServceAndName==========================\n');
+        
         if (user) {
             return done(null, false, req.flash('signupMessage', 'Name is already taken'));
         } else {
@@ -81,11 +84,14 @@ function try_auth_facebook(req, token, refreshToken, profile, done) {
 }
 
 function try_auth_google(req, token, refreshToken, profile, done) {
+    process.stdout.write('\n==========================try_auth_google==========================\n');
     let user_id = profile.id;
     let service = 'google';
     let name = profile.displayName;
 
     userRepository.findByUserIdAndServceAndName(0, service, name, function (user) {
+        
+        process.stdout.write('\n==========================findByUserIdAndServceAndName==========================\n');
 
         if (!user) {
             userRepository.save(new User(user_id, token, service, name));
