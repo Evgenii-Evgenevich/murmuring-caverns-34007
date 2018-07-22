@@ -35,9 +35,9 @@
         <% } %>
 
         <% if (locals.signin) { %>
-            <section id='signin' class='inner'>
-                <% if (session.authenticated) { %>
-                <% } else { %>
+            <% if (session.authenticated) { %>
+            <% } else { %>
+                <section id='signin' class='inner'>
                     <p>
                         <form action='/signin/temp' method='post'>
                             <table>
@@ -50,20 +50,20 @@
                                     <td><input type='password' name='pass'/></td>
                                 </tr>
                                 <tr>
-                                    <td></td>
+                                    <td><%= locals.message %></td>
                                     <td><input style='float: right' type='submit' value='sign in'/></td>
                                 </tr>
                             </table>
                         </form>
                     </p>
-                <% } %>
-            </section>
+                </section>
+            <% } %>
         <% } %>
 
         <% if (locals.signup) { %>
-            <section id='signup' class='inner'>
-                <% if (session.authenticated) { %>
-                <% } else { %>
+            <% if (session.authenticated) { %>
+            <% } else { %>    
+                <section id='signup' class='inner'>
                     <p>
                         <form action='/signup/temp' method='post'>
                             <table>
@@ -73,17 +73,17 @@
                                 </tr>
                                 <tr>
                                     <td><label>Yours Password:</label></td>
-                                    <td><input type='text' name='pass'/></td>
+                                    <td><input type='text' name='pass' value='<%= locals.gpass %>'/></td>
                                 </tr>
                                 <tr>
-                                    <td></td>
+                                    <td><%= locals.message %></td>
                                     <td><input style='float: right' type='submit' value='sign up'/></td>
                                 </tr>
                             </table>
                         </form>
                     </p>
-                <% } %>
-            </section>
+                </section>
+            <% } %>
         <% } %>
 
         <div class='title'>

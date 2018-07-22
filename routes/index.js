@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const passport = require('../passport');
+const password = require('../pass');
 
-/* GET home page. */
 router
     .get('/',
         (req, res, next) => {
@@ -19,7 +19,7 @@ router
     )
     .get('/signin/temp',
         (req, res, next) => {
-            res.render('index', { session: req.session, locals: { signin:true }, message: req.flash('signinMessage') });
+            res.render('index', { session: req.session, locals: { signin:true, message:req.flash('signinMessage') } });
         }
     )
     .post('/signin/temp',
@@ -31,7 +31,7 @@ router
     )
     .get('/signup/temp',
         (req, res, next) => {
-            res.render('index', { session: req.session, locals: { signup:true }, message: req.flash('signupMessage') });
+            res.render('index', { session: req.session, locals: { signup:true, gpass:password.generate(9), message:req.flash('signupMessage') } });
         }
     )
     .post('/signup/temp',
@@ -61,7 +61,11 @@ router
         passport.authenticate('auth-google', {
             successRedirect : '/',
             failureRedirect : '/',
-        })
+        }),
+        (req, res) => {
+            req.session.token = req.user.token;
+            res.redirect('/');
+        }
     )
 ;
 

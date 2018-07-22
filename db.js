@@ -1,28 +1,42 @@
+const URL = process.env.MONGODB_URI || 'mongodb://EE:suppass@localhost:27017/db';
 const MongoClient = require('mongodb').MongoClient;
 
-function db_connect(callback) {
-    MongoClient.connect('mongodb://EE:suppass@localhost:27017/db', function(err, db) {
-        //if (err) throw err;
+var dbo;
 
-        callback( db );
+MongoClient.connect(URL,
+    { useNewUrlParser: true },
+    (err, client) => {
+        if (err) {
+            process.stdout.write('\n==========================err==========================\n');
+            process.stdout.write(err);
+            process.stdout.write('\n==========================err==========================\n');
+            throw err;
+            return null;
+        }
+        process.stdout.write('\n==========================url==========================\n');
+        process.stdout.write(URL);
+        process.stdout.write('\n==========================url==========================\n');
 
-        db.close();
-    });
-}
+        dbo = client.db();
+    }
+);
 
 module.exports = {
-    db: db_connect,
+    db: dbo,
 
     collection: function (name, callback) {
-        db_connect((db) => {
-            db.collection(name, function (err, result) {
-                //if (err) throw err;
+        dbo.collection(name, function (err, result) {
+            if (err) {
+                process.stdout.write('\n==========================err==========================\n');
+                process.stdout.write(err);
+                process.stdout.write('\n==========================err==========================\n');
+                throw err;
+                return null;
+            }
 
-                callback( result );
-            });
+            callback(result);
         });
     }
-
 };
 
 

@@ -7,7 +7,7 @@ const server = require('./server');
 
 const secret = require('./pass').generate(30);
 
-const session = require('express-session')({
+const session = (require('express-session'))({
     key: 'user_sid',
     secret: secret,
     resave: false,
@@ -33,8 +33,25 @@ app
     .set('view engine', 'ejs')
 ;
 
+const socket = require('./socket');
+
+socket.io.use((socket, next) => {
+    session(socket.request, socket.request.res, next);
+});
+
+const userRepository = require('./UserRepository');
+
+passport.serializeUser((user, done) => {
+    done(null, user);
+})
+
+passport.deserializeUser((user, done) => {
+    userRepository.findByUserIdAndServceAndName(user.user_id, user.service, user.name, (deserializedUser) => {
+        done(null, deserializedUser);
+    });
+})
+
 
 server
-    .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+    .listen(PORT, () => console.log(`Listening on ${PORT}`))
 ;
-

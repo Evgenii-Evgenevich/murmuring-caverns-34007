@@ -29,7 +29,7 @@ module.exports = {
         });
     },
 
-    findByUserId: function(user_id) {
+    findByUserId: function (user_id, callback) {
         user_collection(function (collection) {
             collection.findOne( { user_id: user_id },
                 function (err, res) {
@@ -41,9 +41,21 @@ module.exports = {
         });
     },
 
-    findByName: function(name) {
+    findByName: function (name, callback) {
         user_collection(function (collection) {
             collection.findOne( { name: name },
+                function (err, res) {
+                    //if (err) throw err;
+
+                    callback(res);
+                }
+            );
+        });
+    },
+
+    findByUserIdAndServceAndName: function (user_id, service, name, callback) {
+        user_collection(function (collection) {
+            collection.findOne({ user_id: user_id, service: service, name: name },
                 function (err, res) {
                     //if (err) throw err;
 
