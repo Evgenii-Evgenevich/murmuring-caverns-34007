@@ -8,9 +8,6 @@ const FACEBOOK_ID = process.env.PASSPORT_FACEBOOK_ID || 'clientID';
 const FACEBOOK_SECRET = process.env.PASSPORT_FACEBOOK_SECRET || 'clientSecret';
 const FACEBOOK_CALLBACK = 'https://murmuring-caverns-34007.herokuapp.com:' + PORT + '/auth/facebook/callback';
 
-const host = server.address().address;
-const port = server.address().port;
-
 const passport = require('passport');
 
 const userController = require('./UserController');
