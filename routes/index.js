@@ -22,7 +22,7 @@ router
             res.render('index', { session: req.session, locals: { signin:true, message:req.flash('signinMessage') } });
         }
     )
-    .post('/signin/temp',
+    .post('/signin/temp/callback',
         passport.authenticate('signin-temp', {
             successRedirect : '/',
             failureRedirect : '/signin/temp',
@@ -34,7 +34,7 @@ router
             res.render('index', { session: req.session, locals: { signup:true, gpass:password.generate(9), message:req.flash('signupMessage') } });
         }
     )
-    .post('/signup/temp',
+    .post('/signup/temp/callback',
         passport.authenticate('signup-temp', {
             successRedirect : '/',
             failureRedirect : '/signup/temp',

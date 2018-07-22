@@ -19,7 +19,7 @@ const signinStrategy = new (require('passport-local').Strategy)({
 	},
 	(req, name, pass, done) => {
 		process.nextTick(() => {
-			userController.temp.try_signin(req, name, pass, done);
+			return userController.temp.try_signin(req, name, pass, done);
 		});
 	}
 );
@@ -32,7 +32,7 @@ const signupStrategy = new (require('passport-local').Strategy)({
 	},
 	(req, name, pass, done) => {
 		process.nextTick(() => {
-			userController.temp.try_signup(req, name, pass, done);
+			return userController.temp.try_signup(req, name, pass, done);
 		});
 	}
 );
@@ -47,7 +47,7 @@ const facebookStrategy = new (require('passport-facebook').Strategy)({
     },
 	(req, token, refreshToken, profile, done) => {
 		process.nextTick(() => {
-			userController.facebook.try_auth_facebook(req, token, refreshToken, profile, done);
+			return userController.facebook.try_auth_facebook(req, token, refreshToken, profile, done);
 		});
 	}
 );
@@ -61,7 +61,7 @@ const googleStrategy = new (require('passport-google-oauth').OAuth2Strategy)({
 	},
 	(req, token, refreshToken, profile, done) => {
 		process.nextTick(() => {
-			userController.google.try_auth_google(req, token, refreshToken, profile, done);
+			return userController.google.try_auth_google(req, token, refreshToken, profile, done);
 		});
 	}
 );
