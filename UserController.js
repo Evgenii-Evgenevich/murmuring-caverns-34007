@@ -8,7 +8,7 @@ const password = require('./pass');
 function temp_save(req, name, pass) {
     process.stdout.write('\n==========================temp_save==========================\n');
 	
-    userRepository.save(new User(0, password.hashPassword(pass), 'temp', name));
+    userRepository.save(new User('0', password.hashPassword(pass), 'temp', name));
 
     req.session.authenticated = true;
     req.session.user_id = user_id;
@@ -20,10 +20,10 @@ function temp_save(req, name, pass) {
 function try_signin(req, name, pass, done) {
     process.stdout.write('\n==========================try_signin==========================\n');
 	
-    let user_id = 0;
+    let user_id = '0';
     let service = 'temp';
 
-    userRepository.findByUserIdAndServceAndName(0, service, name, (user) => {
+    userRepository.findByUserIdAndServceAndName(user_id, service, name, (user) => {
         process.stdout.write('\n==========================findByUserIdAndServceAndName==========================\n');
 		
         if (!user) {
@@ -48,7 +48,7 @@ function try_signin(req, name, pass, done) {
 function try_signup(req, name, pass, done) {
     process.stdout.write('\n==========================try_signup==========================\n');
 	
-    let user_id = 0;
+    let user_id = '0';
     let service = 'temp';
 
     userRepository.findByUserIdAndServceAndName(user_id, service, name, (user) => {
@@ -75,7 +75,7 @@ function try_auth_facebook(req, token, refreshToken, profile, done) {
     let service = 'facebook';
     let name = profile.name.givenName + ' ' + profile.name.familyName;
 
-    userRepository.findByUserIdAndServceAndName(0, service, name, (user) => {
+    userRepository.findByUserIdAndServceAndName(user_id, service, name, (user) => {
         process.stdout.write('\n==========================findByUserIdAndServceAndName==========================\n');
 
         if (!user) {
@@ -95,11 +95,12 @@ function try_auth_facebook(req, token, refreshToken, profile, done) {
 
 function try_auth_google(req, token, refreshToken, profile, done) {
     process.stdout.write('\n==========================try_auth_google==========================\n');
+	
     let user_id = profile.id;
     let service = 'google';
     let name = profile.displayName;
 
-    userRepository.findByUserIdAndServceAndName(0, service, name, (user) => {
+    userRepository.findByUserIdAndServceAndName(user_id, service, name, (user) => {
         process.stdout.write('\n==========================findByUserIdAndServceAndName==========================\n');
 
         if (!user) {
