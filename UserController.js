@@ -8,12 +8,15 @@ const password = require('./pass');
 function temp_save(req, name, pass) {
     process.stdout.write('\n==========================temp_save==========================\n');
 	
+    let user_id = '0';
+    let service = 'temp';
+	
     userRepository.save(new User('0', password.hashPassword(pass), 'temp', name));
 
     req.session.authenticated = true;
     req.session.user_id = user_id;
-    req.session.username = req.body.username;
-    req.session.auth_service = 'temp';
+    req.session.username = name;
+    req.session.auth_service = service;
     socket.io.emit('add user', name);
 }
 
