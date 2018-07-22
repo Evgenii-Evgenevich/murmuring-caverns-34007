@@ -20,11 +20,13 @@ const usersRouter = require('./routes/users');
 const passport = require('./passport');
 const flash = require('connect-flash');
 const logger = require('morgan');
+const bodyParser = require('body-parser');
 
 app
     .use(logger('dev'))
     .use(express.static(path.join(__dirname, 'public')))
     .use(express.json())
+	.use(bodyParser.urlencoded({ extended: true }))
     .use(session)
     .use(passport.initialize())
     .use(passport.session())
