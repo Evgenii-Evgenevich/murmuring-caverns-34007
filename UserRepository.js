@@ -10,7 +10,7 @@ module.exports = {
     findAll: function(callback) {
         user_collection(function (collection) {
             collection.find().toArray(function (err, res) {
-                //if (err) throw err;
+                if (err) throw err;
 
                 callback(res);
             });
@@ -21,7 +21,7 @@ module.exports = {
         user_collection(function (collection) {
             collection.findOne( { _id: collection.db.bson_serializer.ObjectID.createFromHexString(id) },
                 function (err, res) {
-                    //if (err) throw err;
+                    if (err) throw err;
 
                     callback(res);
                 }
@@ -33,7 +33,7 @@ module.exports = {
         user_collection(function (collection) {
             collection.findOne( { user_id: user_id },
                 function (err, res) {
-                    //if (err) throw err;
+                    if (err) throw err;
 
                     callback(res);
                 }
@@ -45,7 +45,7 @@ module.exports = {
         user_collection(function (collection) {
             collection.findOne( { name: name },
                 function (err, res) {
-                    //if (err) throw err;
+                    if (err) throw err;
 
                     callback(res);
                 }
@@ -57,7 +57,7 @@ module.exports = {
         user_collection(function (collection) {
             collection.findOne({ user_id: user_id, service: service, name: name },
                 function (err, res) {
-                    //if (err) throw err;
+                    if (err) throw err;
 
                     callback(res);
                 }
